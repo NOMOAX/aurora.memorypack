@@ -25,13 +25,9 @@ namespace Aurora.MemoryPack
         /// <param name="memoryPackable">添加了 <see cref="MemoryPackableAttribute"/> 特性的类型的实例。</param>
         /// <typeparam name="T"><paramref name="memoryPackable"/> 的类型。</typeparam>
         /// <returns><paramref name="memoryPackable"/> 的深拷贝。</returns>
-        /// <exception cref="ArgumentException"><typeparamref name="T"/> 没有添加 <see cref="MemoryPackableAttribute"/> 特性。</exception>
+        /// <remarks><typeparamref name="T"/> 只能是添加了 <see cref="MemoryPackableAttribute"/> 特性的类型，或者前述类型的集合（数组、列表、字典等，具体支持情况见 MemoryPack 文档）。</remarks>
         public static T Clone<T>(T memoryPackable)
         {
-            if (Attribute.GetCustomAttribute(typeof(T), typeof(MemoryPackableAttribute)) is null)
-            {
-                throw new ArgumentException($"类型 {typeof(T)} 没有添加 {nameof(MemoryPackableAttribute)} 特性");
-            }
             return MemoryPackSerializer.Deserialize<T>(MemoryPackSerializer.Serialize(memoryPackable));
         }
 
