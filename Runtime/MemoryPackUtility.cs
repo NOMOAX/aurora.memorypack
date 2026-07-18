@@ -22,13 +22,13 @@ namespace Aurora.MemoryPack
         /// <summary>
         /// 克隆。
         /// </summary>
-        /// <param name="memoryPackable">添加了 <see cref="MemoryPackableAttribute"/> 特性的类型的实例。</param>
+        /// <param name="memoryPackable">添加了 <see cref="MemoryPackableAttribute"/> 特性的类型的实例。这个参数是按引用传递的。</param>
         /// <typeparam name="T"><paramref name="memoryPackable"/> 的类型。</typeparam>
         /// <returns><paramref name="memoryPackable"/> 的深拷贝。</returns>
         /// <remarks><typeparamref name="T"/> 只能是添加了 <see cref="MemoryPackableAttribute"/> 特性的类型，或者前述类型的集合（数组、列表、字典等，具体支持情况见 MemoryPack 文档）。</remarks>
-        public static T Clone<T>(T memoryPackable)
+        public static T Clone<T>(in T memoryPackable)
         {
-            return MemoryPackSerializer.Deserialize<T>(MemoryPackSerializer.Serialize(memoryPackable));
+            return MemoryPackSerializer.Deserialize<T>(MemoryPackSerializer.Serialize(in memoryPackable));
         }
 
         /// <summary>
