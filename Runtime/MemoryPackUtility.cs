@@ -136,7 +136,7 @@ namespace Aurora.MemoryPack
             if (!UnionTypeToUnionTargetTypes.TryGetValue(unionType, out var unionTargetTypes))
             {
                 var memoryPackUnionAttributes =
-                    (MemoryPackUnionAttribute[]) unionType.GetCustomAttributes(typeof(MemoryPackUnionAttribute), false);
+                    (MemoryPackUnionAttribute[])unionType.GetCustomAttributes(typeof(MemoryPackUnionAttribute), false);
                 if (memoryPackUnionAttributes.Length == 0)
                 {
                     throw new ArgumentException($"类型 {unionType} 没有添加 {nameof(MemoryPackUnionAttribute)} 特性");
