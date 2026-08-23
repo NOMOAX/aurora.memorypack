@@ -6,32 +6,32 @@ using MemoryPack;
 namespace Aurora.MemoryPack
 {
     /// <summary>
-    /// 提供对 <see cref="MemoryPackUnionAttribute"/> 包含信息的封装。
+    /// Provides a wrapper for the information contained in <see cref="MemoryPackUnionAttribute"/>.
     /// </summary>
     public readonly struct UnionInfo : IComparable<UnionInfo>, IEquatable<UnionInfo>
     {
         /// <summary>
-        /// 被 <see cref="MemoryPackUnionAttribute"/> 修饰的类型。
+        /// The type decorated with the <see cref="MemoryPackUnionAttribute"/> attribute.
         /// </summary>
         public readonly Type UnionType;
 
         /// <summary>
-        /// <see cref="MemoryPackUnionAttribute.Tag"/>。
+        /// <see cref="MemoryPackUnionAttribute.Tag"/>.
         /// </summary>
         public readonly ushort UnionTargetTag;
 
         /// <summary>
-        /// <see cref="MemoryPackUnionAttribute.Type"/>。
+        /// <see cref="MemoryPackUnionAttribute.Type"/>.
         /// </summary>
         public readonly Type UnionTargetType;
 
         /// <summary>
-        /// 初始化 <see cref="UnionInfo"/> 结构的新实例。
+        /// Initializes a new instance of the <see cref="UnionInfo"/> struct.
         /// </summary>
-        /// <param name="unionType">添加了 <see cref="MemoryPackUnionAttribute"/> 特性的类型。</param>
-        /// <param name="unionTargetTag"><see cref="MemoryPackUnionAttribute.Tag"/>。</param>
-        /// <param name="targetType"><see cref="MemoryPackUnionAttribute.Type"/>。</param>
-        /// <exception cref="ArgumentNullException"><paramref name="unionType"/> 或 <see cref="UnionTargetType"/> 为 <see langword="null"/>。</exception>
+        /// <param name="unionType">The type decorated with the <see cref="MemoryPackUnionAttribute"/> attribute.</param>
+        /// <param name="unionTargetTag"><see cref="MemoryPackUnionAttribute.Tag"/>.</param>
+        /// <param name="targetType"><see cref="MemoryPackUnionAttribute.Type"/>.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="unionType"/> or <see cref="UnionTargetType"/> is <see langword="null"/>.</exception>
         public UnionInfo(Type unionType, ushort unionTargetTag, Type targetType)
         {
             UnionType       = unionType ?? throw new ArgumentNullException(nameof(unionType));

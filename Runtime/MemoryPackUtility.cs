@@ -7,7 +7,7 @@ using MemoryPack;
 namespace Aurora.MemoryPack
 {
     /// <summary>
-    /// 封装常用功能。
+    /// Wraps common functionality.
     /// </summary>
     public static class MemoryPackUtility
     {
@@ -20,23 +20,23 @@ namespace Aurora.MemoryPack
             memoryPackUnionAttribute.Tag;
 
         /// <summary>
-        /// 克隆。
+        /// Clones.
         /// </summary>
-        /// <param name="memoryPackable">添加了 <see cref="MemoryPackableAttribute"/> 特性的类型的实例。这个参数是按引用传递的。</param>
-        /// <typeparam name="T"><paramref name="memoryPackable"/> 的类型。</typeparam>
-        /// <returns><paramref name="memoryPackable"/> 的深拷贝。</returns>
-        /// <remarks><typeparamref name="T"/> 只能是添加了 <see cref="MemoryPackableAttribute"/> 特性的类型，或者前述类型的集合（数组、列表、字典等，具体支持情况见 MemoryPack 文档）。</remarks>
+        /// <param name="memoryPackable">An instance of a type decorated with the <see cref="MemoryPackableAttribute"/> attribute. This parameter is passed by reference.</param>
+        /// <typeparam name="T">The type of <paramref name="memoryPackable"/>.</typeparam>
+        /// <returns>A deep copy of <paramref name="memoryPackable"/>.</returns>
+        /// <remarks><typeparamref name="T"/> can only be a type decorated with the <see cref="MemoryPackableAttribute"/> attribute, or a collection of the aforementioned types (arrays, lists, dictionaries, etc.; see the MemoryPack documentation for the supported cases).</remarks>
         public static T Clone<T>(in T memoryPackable)
         {
             return MemoryPackSerializer.Deserialize<T>(MemoryPackSerializer.Serialize(in memoryPackable));
         }
 
         /// <summary>
-        /// 更新 <paramref name="value"/> 到最新版本。
+        /// Updates <paramref name="value"/> to the latest version.
         /// </summary>
-        /// <param name="value">要更新到最新版本的实例。</param>
-        /// <typeparam name="T"><paramref name="value"/> 的类型。</typeparam>
-        /// <returns>如果 <paramref name="value"/> 更新到了最新版本，则为 <see langword="true"/>；否则为 <see langword="false"/>。</returns>
+        /// <param name="value">The instance to update to the latest version.</param>
+        /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
+        /// <returns>Returns <see langword="true"/> if <paramref name="value"/> was updated to the latest version; otherwise, <see langword="false"/>.</returns>
         public static bool ConvertToLatestVersion<T>(ref T value) where T : ILatestVersionConvertible<T>
         {
             var oldValue  = value;
@@ -50,18 +50,20 @@ namespace Aurora.MemoryPack
                 {
                     if (oldValue.Equals(value))
                     {
-                        Log.I($"实例 ({oldType.Name}, UnionTag = {oldUnionTag}) 已升级");
+                        Log.I($"Instance ({oldType.Name}, UnionTag = {oldUnionTag}) has been upgraded");
                     }
                     else
                     {
-                        Log.I($"实例 ({oldType.Name}, UnionTag = {oldUnionTag}) 已升级为相同类型的另一实例");
+                        Log.I(
+                            $"Instance ({oldType.Name}, UnionTag = {oldUnionTag}) has been upgraded to another instance of the same type"
+                        );
                     }
                 }
                 else
                 {
                     var unionTag = GetUnionTag(type, typeof(T));
                     Log.I(
-                        $"实例 ({oldType.Name}, UnionTag = {oldUnionTag}) 已升级为另一实例 ({type.Name}, UnionTag = {unionTag})"
+                        $"Instance ({oldType.Name}, UnionTag = {oldUnionTag}) has been upgraded to another instance ({type.Name}, UnionTag = {unionTag})"
                     );
                 }
             }
@@ -69,11 +71,11 @@ namespace Aurora.MemoryPack
         }
 
         /// <summary>
-        /// 更新 <paramref name="values"/> 到最新版本。
+        /// Updates <paramref name="values"/> to the latest version.
         /// </summary>
-        /// <param name="values">要更新到最新版本的数组。</param>
-        /// <typeparam name="T"><paramref name="values"/> 的元素的类型。</typeparam>
-        /// <returns>如果 <paramref name="values"/> 更新到了最新版本，则为 <see langword="true"/>；否则为 <see langword="false"/>。</returns>
+        /// <param name="values">The array to update to the latest version.</param>
+        /// <typeparam name="T">The type of the elements of <paramref name="values"/>.</typeparam>
+        /// <returns>Returns <see langword="true"/> if <paramref name="values"/> was updated to the latest version; otherwise, <see langword="false"/>.</returns>
         public static bool ConvertToLatestVersion<T>(T[] values) where T : ILatestVersionConvertible<T>
         {
             if (values is null)
@@ -91,17 +93,17 @@ namespace Aurora.MemoryPack
             }
             if (anyElementConvertedToLatestVersion)
             {
-                Log.I("数组中的至少一个元素已升级");
+                Log.I("At least one element in the array has been upgraded");
             }
             return anyElementConvertedToLatestVersion;
         }
 
         /// <summary>
-        /// 更新 <paramref name="values"/> 到最新版本。
+        /// Updates <paramref name="values"/> to the latest version.
         /// </summary>
-        /// <param name="values">要更新到最新版本的列表。</param>
-        /// <typeparam name="T"><paramref name="values"/> 的元素的类型。</typeparam>
-        /// <returns>如果 <paramref name="values"/> 更新到了最新版本，则为 <see langword="true"/>；否则为 <see langword="false"/>。</returns>
+        /// <param name="values">The list to update to the latest version.</param>
+        /// <typeparam name="T">The type of the elements of <paramref name="values"/>.</typeparam>
+        /// <returns>Returns <see langword="true"/> if <paramref name="values"/> was updated to the latest version; otherwise, <see langword="false"/>.</returns>
         public static bool ConvertToLatestVersion<T>(IList<T> values) where T : ILatestVersionConvertible<T>
         {
             if (values is null)
@@ -120,17 +122,17 @@ namespace Aurora.MemoryPack
             }
             if (anyElementConvertedToLatestVersion)
             {
-                Log.I("列表中的至少一个元素已升级");
+                Log.I("At least one element in the list has been upgraded");
             }
             return anyElementConvertedToLatestVersion;
         }
 
         /// <summary>
-        /// 获取具体类型在其联合类型上定义的对应的 <see cref="MemoryPackUnionAttribute"/> 特性的标签。
+        /// Gets the tag of the <see cref="MemoryPackUnionAttribute"/> attribute defined for the concrete type on its union type.
         /// </summary>
-        /// <param name="targetType">联合类型的目标类型（具体类型）。</param>
-        /// <param name="unionType">联合类型。它是 <paramref name="targetType"/> 的接口类型或者抽象基类类型，带有 <see cref="MemoryPackUnionAttribute"/> 特性。</param>
-        /// <returns></returns>
+        /// <param name="targetType">The target type of the union type (the concrete type).</param>
+        /// <param name="unionType">The union type. It is the interface type or abstract base class type of <paramref name="targetType"/>, decorated with the <see cref="MemoryPackUnionAttribute"/> attribute.</param>
+        /// <returns>The union tag of <paramref name="targetType"/>.</returns>
         public static ushort GetUnionTag(Type targetType, Type unionType)
         {
             if (!UnionTypeToUnionTargetTypes.TryGetValue(unionType, out var unionTargetTypes))
@@ -139,7 +141,9 @@ namespace Aurora.MemoryPack
                     (MemoryPackUnionAttribute[])unionType.GetCustomAttributes(typeof(MemoryPackUnionAttribute), false);
                 if (memoryPackUnionAttributes.Length == 0)
                 {
-                    throw new ArgumentException($"类型 {unionType} 没有添加 {nameof(MemoryPackUnionAttribute)} 特性");
+                    throw new ArgumentException(
+                        $"Type {unionType} is not decorated with the {nameof(MemoryPackUnionAttribute)} attribute"
+                    );
                 }
                 unionTargetTypes = memoryPackUnionAttributes.ToDictionary(GetUnionTargetType, GetUnionTargetTag);
                 UnionTypeToUnionTargetTypes.Add(unionType, unionTargetTypes);

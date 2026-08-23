@@ -3,16 +3,16 @@
 namespace Aurora.MemoryPack
 {
     /// <summary>
-    /// 定义判断当前实例是否是最新版本的可读属性以及转换到最新版本的方法。
+    /// Defines a method for converting the current instance to the latest version.
     /// </summary>
-    /// <typeparam name="T">添加了 <see cref="MemoryPackUnionAttribute"/> 特性的接口类型或抽象类类型。</typeparam>
+    /// <typeparam name="T">The interface type or abstract class type decorated with the <see cref="MemoryPackUnionAttribute"/> attribute.</typeparam>
     public interface ILatestVersionConvertible<T> where T : ILatestVersionConvertible<T>
     {
         /// <summary>
-        /// 更新当前实例到最新版本。
+        /// Updates the current instance to the latest version.
         /// </summary>
-        /// <param name="value">当前实例。</param>
-        /// <returns>如果 <paramref name="value"/> 更新到了最新版本，则为 <see langword="true"/>；否则为 <see langword="false"/>。</returns>
+        /// <param name="value">The current instance.</param>
+        /// <returns>Returns <see langword="true"/> if <paramref name="value"/> was updated to the latest version; otherwise, <see langword="false"/>.</returns>
         bool ConvertToLatestVersion(ref T value);
     }
 }
