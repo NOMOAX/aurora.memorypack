@@ -12,7 +12,7 @@ namespace Aurora.MemoryPack
         /// Updates the current instance to the latest version.
         /// </summary>
         /// <param name="value">The current instance.</param>
-        /// <returns>Returns <see langword="true"/> if <paramref name="value"/> was updated to the latest version; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if <paramref name="value"/> was updated to the latest version; otherwise, <see langword="false"/>.</returns>
         bool ConvertToLatestVersion(ref T value);
     }
 }

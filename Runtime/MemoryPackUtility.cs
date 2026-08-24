@@ -36,7 +36,7 @@ namespace Aurora.MemoryPack
         /// </summary>
         /// <param name="value">The instance to update to the latest version.</param>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
-        /// <returns>Returns <see langword="true"/> if <paramref name="value"/> was updated to the latest version; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if <paramref name="value"/> was updated to the latest version; otherwise, <see langword="false"/>.</returns>
         public static bool ConvertToLatestVersion<T>(ref T value) where T : ILatestVersionConvertible<T>
         {
             var oldValue  = value;
