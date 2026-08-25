@@ -75,7 +75,7 @@ namespace Aurora.MemoryPack
         /// </summary>
         /// <param name="values">The array to update to the latest version.</param>
         /// <typeparam name="T">The type of the elements of <paramref name="values"/>.</typeparam>
-        /// <returns>Returns <see langword="true"/> if <paramref name="values"/> was updated to the latest version; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if <paramref name="values"/> was updated to the latest version; otherwise, <see langword="false"/>.</returns>
         public static bool ConvertToLatestVersion<T>(T[] values) where T : ILatestVersionConvertible<T>
         {
             if (values is null)
@@ -103,7 +103,7 @@ namespace Aurora.MemoryPack
         /// </summary>
         /// <param name="values">The list to update to the latest version.</param>
         /// <typeparam name="T">The type of the elements of <paramref name="values"/>.</typeparam>
-        /// <returns>Returns <see langword="true"/> if <paramref name="values"/> was updated to the latest version; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if <paramref name="values"/> was updated to the latest version; otherwise, <see langword="false"/>.</returns>
         public static bool ConvertToLatestVersion<T>(IList<T> values) where T : ILatestVersionConvertible<T>
         {
             if (values is null)
