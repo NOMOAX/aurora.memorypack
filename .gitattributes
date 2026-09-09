@@ -2,4 +2,5 @@
 
 *.asmdef text eol=lf
 *.cs text eol=lf
+*.meta text eol=lf
 *.md text eol=lf
