@@ -1,7 +1,7 @@
 # Aurora MemoryPack
 
 ![许可](https://img.shields.io/github/license/NOMOAX/aurora.memorypack)
-![版本](https://img.shields.io/badge/version-1.0.4-blue)
+![版本](https://img.shields.io/badge/version-1.0.5-blue)
 ![最低 Unity 版本](https://img.shields.io/badge/Unity-2021.2%2B-blue)
 
 为 MemoryPack 补充版本迁移能力的配套工具包。

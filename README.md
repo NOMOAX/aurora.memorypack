@@ -1,7 +1,7 @@
 # Aurora MemoryPack
 
 ![license](https://img.shields.io/github/license/NOMOAX/aurora.memorypack)
-![version](https://img.shields.io/badge/version-1.0.4-blue)
+![version](https://img.shields.io/badge/version-1.0.5-blue)
 ![lowest Unity version](https://img.shields.io/badge/Unity-2021.2%2B-blue)
 
 A companion toolkit for MemoryPack that adds version-migration support.
