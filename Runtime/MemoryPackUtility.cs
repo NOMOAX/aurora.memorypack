@@ -133,6 +133,7 @@ namespace Aurora.MemoryPack
         /// <param name="targetType">The target type of the union type (the concrete type).</param>
         /// <param name="unionType">The union type. It is the interface type or abstract base class type of <paramref name="targetType"/>, decorated with the <see cref="MemoryPackUnionAttribute"/> attribute.</param>
         /// <returns>The union tag of <paramref name="targetType"/>.</returns>
+        /// <exception cref="ArgumentException"><paramref name="unionType"/> is not decorated with the <see cref="MemoryPackUnionAttribute"/> attribute.</exception>
         public static ushort GetUnionTag(Type targetType, Type unionType)
         {
             if (!UnionTypeToUnionTargetTypes.TryGetValue(unionType, out var unionTargetTypes))
@@ -142,7 +143,7 @@ namespace Aurora.MemoryPack
                 if (memoryPackUnionAttributes.Length == 0)
                 {
                     throw new ArgumentException(
-                        $"Type {unionType} is not decorated with the {nameof(MemoryPackUnionAttribute)} attribute"
+                        $"Type {unionType} is not decorated with the {nameof(MemoryPackUnionAttribute)} attribute."
                     );
                 }
                 unionTargetTypes = memoryPackUnionAttributes.ToDictionary(GetUnionTargetType, GetUnionTargetTag);
